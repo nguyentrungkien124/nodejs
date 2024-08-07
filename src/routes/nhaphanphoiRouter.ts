@@ -1,0 +1,13 @@
+import {  Router } from "express";
+import { container } from "tsyringe";
+import { UploadService } from "../services/uploadService";
+import { NhaphanphoiController } from "../controllers/nhaphanphoiController";
+const nhaphanphoiRouter  = Router();
+const nhaphanphoiController = container.resolve(NhaphanphoiController);
+const uploadService = container.resolve(UploadService);
+nhaphanphoiRouter.get('/getallnpp',nhaphanphoiController.getNhaphanphoiAll.bind(nhaphanphoiController));
+nhaphanphoiRouter.post('/themnpp',uploadService.UploadNuochoa,nhaphanphoiController.createNhaphanphoi.bind(nhaphanphoiController));
+nhaphanphoiRouter.put('/suanpp',uploadService.UploadNuochoa,nhaphanphoiController.updateNhaphanphoi.bind(nhaphanphoiController));
+nhaphanphoiRouter.delete('/xoanpp/:id',nhaphanphoiController.deleteNhaphanphoi.bind(nhaphanphoiController));
+nhaphanphoiRouter.get('/getID/:id',nhaphanphoiController.getNhaPhanPhoiById.bind(nhaphanphoiController));
+export default nhaphanphoiRouter;
